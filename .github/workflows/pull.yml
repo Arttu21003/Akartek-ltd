@@ -14,7 +14,7 @@ jobs: # The jobs that run in this workflow
       issues: write
     steps: # The "steps" section contains the individual tasks that will be performed in this job.
       - name: attach label to issues # The name of the step
-        uses: actions/github-script@v6 # This step uses the "actions/github-script" action to execute a script that adds labels to the issue.
+        uses: actions/github-script@v3 # This step uses the "actions/github-script" action to execute a script that adds labels to the issue.
         with:
           script: | # The script calls the GitHub REST API to add labels to the issue.
             github.rest.pull_request.addLabels({
