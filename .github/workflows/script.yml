@@ -27,20 +27,5 @@ jobs: # The jobs that run in this workflow
           body: | # The body of the comment is a message thanking the user for opening the issue.
            Thanks for opening this issue! We'll take a look as soon as possible.
       
-      - name: Comment on Closed Issue
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          issue-number: ${{ github.event.issue.number2 }}
-          body: |
-            The issue was resolved
-      
 
-# Comment on when an issue is closed
-      - name: Comment on first pull request # This step comments on the user's first pull request.
-        uses: peter-evans/create-or-update-comment@v1 # This step uses the "peter-evans/create-or-update-comment" action to create or update a comment on the issue.
-        with:
-# Comment on when an users opens the first pull request 
-          issue-number: ${{ github.event.pull_request.number }} # The pull request number is obtained from the context of the event that triggered the action.
-          body: | # The body of the comment is a message thanking the user for their contribution and encouraging them to continue contributing.
-            Congratulations on opening your first pull request! 
 
