@@ -31,9 +31,10 @@ jobs: # The jobs that run in this workflow
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.issue.number }}
-          type: -closed
           body: |
             The issue was resolved.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
 
 # Comment on when an issue is closed
