@@ -32,14 +32,14 @@ jobs: # The jobs that run in this workflow
         with:
           script: | # The script calls the GitHub REST API to add labels to the issue.
             github.rest.issues.addLabels({
-              issue_number: context.issue.number,  
+              issue_number: context.issue.number2,  
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: ["issue", "fixed"]
       - name: Comment on Closed Issue
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: ${{ github.event.issue.number }}
+          issue-number: ${{ github.event.issue.number2 }}
           body: |
             The issue was resolved
       
