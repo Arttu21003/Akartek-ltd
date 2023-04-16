@@ -17,7 +17,7 @@ jobs: # The jobs that run in this workflow
               issue_number: context.issue.number,  
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ["issue", "fix"]
+              labels: ["issue", "fixed"]
             })
       - name: Comment on Closed Issue
         uses: peter-evans/create-or-update-comment@v1
