@@ -1,15 +1,24 @@
-name: Post congrats comment
+name: First Pull Request Workflow
+
 on:
   pull_request:
     types: [opened]
-permissions:
-  pull-requests: write
+    
 jobs:
-  build:
-    name: Post congrats comment
+  first-pull-request:
     runs-on: ubuntu-latest
+    outputs:
+      contributor: ${{ github.event.pull_request.user.login }}
+    if: steps.check.outputs.first-pull-request == 'true'
     steps:
-      - run: gh pr comment $PR_URL --body "Congrats for opening your first pull request!"
-        env:
-          GITHUB_TOKEN: ${{ secrets.AUTOCOMMENT.PAT }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
+    - name: Check First Pull Request
+      id: check
+      run: echo "::set-output name=first-pull-request::$(if [ $(git rev-list --count HEAD..$(git merge-base HEAD ${{ github.event.pull_request.base.sha }})) -eq 0 ]; then echo 'true'; else echo 'false'; fi)"
+  send-notification:
+    needs: [first-pull-request]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+    - name: Send Notification
+      run: |
+        echo "Congratulations ${{ needs.first-pull-request.outputs.contributor }} for opening your first pull request!"
