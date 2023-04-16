@@ -16,7 +16,7 @@ jobs: # The jobs that run in this workflow
         with:
           script: | # The script calls the GitHub REST API to add labels to the issue.
             github.rest.issues.addLabels({
-              issue_number: context.issue.number, context.issue.number2, 
+              issue_number: context.issue.number,  
               owner: context.repo.owner,
               repo: context.repo.repo,
               labels: ["issue", "fix"]
@@ -24,14 +24,14 @@ jobs: # The jobs that run in this workflow
       - name: Comment on new issue #this is another step that comments on the issue 
         uses: peter-evans/create-or-update-comment@v1 # This step uses the "peter-evans/create-or-update-comment" action to create or update a comment on the issue.
         with:
-          issue-number: ${{ github.event.issue.number }} # The issue number is obtained from the context of the event that triggered the action.
+          issue-number: ${{ github.context.issue.number }} # The issue number is obtained from the context of the event that triggered the action.
           body: | # The body of the comment is a message thanking the user for opening the issue.
            Thanks for opening this issue! We'll take a look as soon as possible.
            
       - name: Comment on Closed Issue
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: ${{ github.event.issue.number2 }}
+          issue-number: ${{ github.context.issue.number }}
           body: |
             The issue was resolved.
       
