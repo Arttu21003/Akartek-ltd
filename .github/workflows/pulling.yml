@@ -1,12 +1,16 @@
+name: Pull request comment
+
 on:
-pull_request:
-types: [opened]
+  pull_request:
+    types: [opened]
 
 jobs:
-congratulate:
-runs-on: ubuntu-latest
-name: Congratulate User on their First Pull Request
-steps:
-- name: Congratulate User
-run: |
-echo "Congratulations on making your first pull request!"
+  comment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Comment on pull request
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          body: |
+            Congratulations on opening your first pull request!
