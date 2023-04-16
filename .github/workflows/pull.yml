@@ -2,7 +2,7 @@ name: Auto comment, when pull request has been created
 on:  # This action will trigger when an issue is reopened or opened.
  issues:
   types:
-  - opened
+   - opened
  pull_request:
     branches:
       - main
