@@ -1,0 +1,12 @@
+on:
+pull_request:
+types: [opened]
+
+jobs:
+congratulate:
+runs-on: ubuntu-latest
+name: Congratulate User on their First Pull Request
+steps:
+- name: Congratulate User
+run: |
+echo "Congratulations on making your first pull request!"
