@@ -4,7 +4,6 @@ on:  # This action will trigger when an issue is reopened or opened.
     types:
       - reopened
       - opened
-      - closed
 jobs: # The jobs that run in this workflow
   label_issues: # the first job is named as label_issues
     runs-on: ubuntu-latest # This job will run on the latest version of Ubuntu.
@@ -27,15 +26,7 @@ jobs: # The jobs that run in this workflow
           issue-number: ${{ github.event.issue.number }} # The issue number is obtained from the context of the event that triggered the action.
           body: | # The body of the comment is a message thanking the user for opening the issue.
            Thanks for opening this issue! We'll take a look as soon as possible.
-      - name: attach label to issues # The name of the step
-        uses: actions/github-script@v6 # This step uses the "actions/github-script" action to execute a script that adds labels to the issue.
-        with:
-          script: | # The script calls the GitHub REST API to add labels to the issue.
-            github.rest.issues.addLabels({
-              issue_number: context.issue.number2,  
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ["issue", "fixed"]
+      
       - name: Comment on Closed Issue
         uses: peter-evans/create-or-update-comment@v1
         with:
