@@ -9,18 +9,8 @@ jobs: # The jobs that run in this workflow
     permissions: # This job requires write access to issues in order to add labels and comment.
       issues: write
     steps: # The "steps" section contains the individual tasks that will be performed in this job.
-      - name: attach label to issues # The name of the step
-        uses: actions/github-script@v6 # This step uses the "actions/github-script" action to execute a script that adds labels to the issue.
-        with:
-          script: | # The script calls the GitHub REST API to add labels to the issue.
-            github.rest.pull_request.addLabels({
-              issue_number: context.pull_request.number,  
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: [enhancement]
-            })
             
-      # Comment on when an issue is closed
+     
       - name: Comment on first pull request # This step comments on the user's first pull request.
         uses: peter-evans/create-or-update-comment@v1 # This step uses the "peter-evans/create-or-update-comment" action to create or update a comment on the issue.
         with:
