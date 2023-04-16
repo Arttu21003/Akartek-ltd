@@ -19,7 +19,7 @@ jobs: # The jobs that run in this workflow
               repo: context.repo.repo,
               labels: ["issue", "fix"]
             })
-        - name: Comment on Closed Issue
+      - name: Comment on Closed Issue
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.issue.number }}
