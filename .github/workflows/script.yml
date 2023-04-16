@@ -23,6 +23,7 @@ jobs: # The jobs that run in this workflow
       - name: Comment on new issue #this is another step that comments on the issue 
         uses: peter-evans/create-or-update-comment@v1 # This step uses the "peter-evans/create-or-update-comment" action to create or update a comment on the issue.
         with:
+          token: ${{ AUTOCOMMENT_PAT }}
           issue-number: ${{ github.event.issue.number }} # The issue number is obtained from the context of the event that triggered the action.
           body: | # The body of the comment is a message thanking the user for opening the issue.
            Thanks for opening this issue! We'll take a look as soon as possible.
@@ -31,7 +32,7 @@ jobs: # The jobs that run in this workflow
       - name: Comment on first pull request # This step comments on the user's first pull request.
         uses: peter-evans/create-or-update-comment@v1 # This step uses the "peter-evans/create-or-update-comment" action to create or update a comment on the issue.
         with:
-       
+          token: ${{ AUTOCOMMENT_PAT }}
 # Comment on when an users opens the first pull request 
           issue-number: ${{ github.event.pull_request.number }} # The pull request number is obtained from the context of the event that triggered the action.
           body: | # The body of the comment is a message thanking the user for their contribution and encouraging them to continue contributing.
