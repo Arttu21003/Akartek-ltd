@@ -1,7 +1,7 @@
-name: Auto comment, when issue is resolved #the name of the workflow
+name: Auto comment, when pull request has been created
 on:  # This action will trigger when an issue is reopened or opened.
-  pull_requests:
-    types:
+ pull_request:
+    branches:
       - main
 jobs: # The jobs that run in this workflow
   label_issues: # the first job is named as label_issues
