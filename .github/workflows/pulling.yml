@@ -1,16 +1,15 @@
-name: Pull request comment
-
+name: AutoComment on oull request
 on:
   pull_request:
     types: [opened]
-
+permissions:
+  pull-requests: write
 jobs:
-  comment:
+  build:
+    name: congrats on pull request
     runs-on: ubuntu-latest
-
     steps:
-      - name: Comment on pull request
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          body: |
-            Congratulations on opening your first pull request!
+      - run: gh pr comment $PR_URL --body "Congrats for opening your first pull request!"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
