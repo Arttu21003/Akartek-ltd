@@ -13,7 +13,7 @@ jobs: # The jobs that run in this workflow
         uses: actions/github-script@v6 # This step uses the "actions/github-script" action to execute a script that adds labels to the issue.
         with:
           script: | # The script calls the GitHub REST API to add labels to the issue.
-            github.rest.issues.addLabels({
+            github.rest.pull_request.addLabels({
               issue_number: context.pull_request.number,  
               owner: context.repo.owner,
               repo: context.repo.repo,
