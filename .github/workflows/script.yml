@@ -31,7 +31,7 @@ jobs: # The jobs that run in this workflow
       - name: Comment on Closed Issue
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: ${{ github.event.opened.issue.number }}
+          issue-number: ${{ github.event.issue.comment.number }}
           body: |
             The issue was resolved.
       
