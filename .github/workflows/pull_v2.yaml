@@ -18,3 +18,10 @@ jobs:
             issue_number: context.payload.pull_request.number,
             body: 'Hello! Thanks for creating a pull request.'
           })
+    - name: Comment on first pull request # This step comments on the user's first pull request.
+      uses: peter-evans/create-or-update-comment@v1 # This step uses the "peter-evans/create-or-update-comment" action to create or update a comment on the issue.
+      with:
+# Comment on when an users opens the first pull request 
+          issue-number: ${{ github.event.pull_request.number }} # The pull request number is obtained from the context of the event that triggered the action.
+          body: | # The body of the comment is a message thanking the user for their contribution and encouraging them to continue contributing.
+            Congratulations on opening your first pull request! 
