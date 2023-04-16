@@ -11,5 +11,5 @@ jobs:
     steps:
       - run: gh pr comment $PR_URL --body "Congrats for opening your first pull request!"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.AUTOCOMMENT_PAT }}
           
