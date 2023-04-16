@@ -1,43 +1,15 @@
-name: Label & comment issues
+name: Post congrats comment
 on:
-  issues:
-    types: [opened, reopened, closed]
   pull_request:
     types: [opened]
-
+permissions:
+  pull-requests: write
 jobs:
-  label_issues:
+  build:
+    name: Post congrats comment
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
     steps:
-      - name: attach label to issues
-        uses: actions/github-script@v6
-        with:
-          script: |
-            github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ["issue", "fix"]
-            })
-      - name: Comment on new issue
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          body: |
-            Thanks for opening this issue! We'll take a look as soon as possible.
-      - name: Comment on closed issue
-        uses: peter-evans/create-or-update-comment@v1
-        if: github.event_name == 'issues' && github.event.action == 'closed'
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          body: |
-            Thanks for reporting this issue! We're glad to hear it's been resolved.
-      - name: Comment on first pull request
-        uses: peter-evans/create-or-update-comment@v1
-        if: github.event_name == 'pull_request' && github.event.pull_request.commits == 1
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            Thanks for submitting your first pull request!
+      - run: gh pr comment $PR_URL --body "Congrats for opening your first pull request!"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
