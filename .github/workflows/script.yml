@@ -29,7 +29,7 @@ jobs: # The jobs that run in this workflow
 
 
       - name: Comment on Closed Issue
-        uses: peter-evans/create-or-update-comment@v1.3.3
+        uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
