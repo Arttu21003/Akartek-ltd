@@ -31,9 +31,9 @@ jobs: # The jobs that run in this workflow
       - name: Comment on Closed Issue
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: ${{ github.event.issue.number }}
+          issue-number: ${{ github.event.issue.number2 }}
           body: |
-            The issue #{{ github.event.issue.number }} was closed.
+            The issue #{{ github.event.issue.number2 }} was closed.
 
 # Comment on when an issue is closed
       - name: Comment on first pull request # This step comments on the user's first pull request.
